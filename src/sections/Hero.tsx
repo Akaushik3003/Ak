@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-white text-black flex items-center justify-center py-16"
+      className="relative min-h-screen pt-20 overflow-hidden bg-white text-black flex items-center justify-center py-16"
     >
       {/* Background Glow */}
       <div className="absolute w-[500px] h-[500px] bg-cyan-300 rounded-full blur-[140px] opacity-30 top-[-100px] left-[-100px]" />
@@ -23,7 +23,7 @@ export default function Hero() {
       >
         {/* Profile Image */}
         <div className="flex justify-center mb-10">
-          <div className="relative w-52 h-52 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white">
+          <div className="relative w-44 h-44 sm:w-48 sm:h-48 md:w-52 md:h-52 rounded-full overflow-hidden shadow-2xl border-4 border-white">
             <Image
               src="/ak.jpeg"
               alt="A.Kaushik"
