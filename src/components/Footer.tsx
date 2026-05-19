@@ -49,6 +49,13 @@ export default function Footer() {
 
       </motion.div>
 
+      {/* Bottom Copyright */}
+      <div className="mt-8 text-center">
+        <p className="text-gray-500 text-sm">
+          © 2026 A.Kaushik. All Rights Reserved.
+        </p>
+      </div>
+
     </footer>
   );
 }
