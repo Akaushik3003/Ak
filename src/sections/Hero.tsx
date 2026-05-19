@@ -7,9 +7,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-white text-black flex items-center justify-center"
+      className="relative min-h-screen overflow-hidden bg-white text-black flex items-center justify-center py-16"
     >
-
       {/* Background Glow */}
       <div className="absolute w-[500px] h-[500px] bg-cyan-300 rounded-full blur-[140px] opacity-30 top-[-100px] left-[-100px]" />
 
@@ -20,14 +19,11 @@ export default function Hero() {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-10 text-center px-6 backdrop-blur-sm"
+        className="relative z-10 text-center px-6"
       >
-
         {/* Profile Image */}
-        <div className="flex justify-center mb-12">
-
-          <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-3xl overflow-hidden shadow-2xl">
-
+        <div className="flex justify-center mb-10">
+          <div className="relative w-52 h-52 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white">
             <Image
               src="/ak.jpeg"
               alt="A.Kaushik"
@@ -35,13 +31,11 @@ export default function Hero() {
               priority
               className="object-cover"
             />
-
           </div>
-
         </div>
 
         {/* Heading */}
-        <p className="uppercase tracking-[0.3em] text-sm text-cyan-500 mb-6">
+        <p className="uppercase tracking-[0.3em] text-sm text-cyan-500 mb-5">
           Welcome To My Portfolio
         </p>
 
@@ -51,14 +45,13 @@ export default function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="text-base sm:text-lg md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-2">
           Computer Science undergraduate passionate about full-stack
           development, scalable applications, and modern digital experiences.
         </p>
 
         {/* Buttons */}
-        <div className="mt-10 flex flex-col md:flex-row gap-5 justify-center">
-
+        <div className="mt-10 flex flex-col sm:flex-row gap-5 justify-center items-center">
           <a
             href="#projects"
             className="px-8 py-4 rounded-full bg-cyan-400 text-black font-semibold hover:scale-105 hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-cyan-400/40"
@@ -73,11 +66,8 @@ export default function Hero() {
           >
             Download Resume
           </a>
-
         </div>
-
       </motion.div>
-
     </section>
   );
 }
