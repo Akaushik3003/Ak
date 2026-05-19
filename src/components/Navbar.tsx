@@ -52,8 +52,10 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Icon */}
-        <div className="md:hidden text-3xl text-black cursor-pointer">
-          ☰
+        <div className="md:hidden">
+          <button className="p-2 rounded-lg hover:bg-gray-100 transition duration-300 text-2xl text-black">
+            ☰
+          </button>
         </div>
 
       </div>
