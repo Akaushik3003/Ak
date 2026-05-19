@@ -91,7 +91,7 @@ Run the development server:
 npm run dev
 🌐 Live Demo
 
-Coming Soon...
+(https://ak-liard.vercel.app/)
 
 📬 Contact
 
