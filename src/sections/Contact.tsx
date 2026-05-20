@@ -106,7 +106,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://linkedin.com/in/YOUR-LINKEDIN"
+              href="https://linkedin.com/in/akaushik30"
               target="_blank"
               className="text-lg text-gray-700 hover:text-cyan-500 transition duration-300"
             >
