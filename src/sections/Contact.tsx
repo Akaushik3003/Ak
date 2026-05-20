@@ -1,8 +1,39 @@
 "use client";
 
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 
 export default function Contact() {
+
+  const form = useRef<HTMLFormElement>(null);
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    emailjs
+      .sendForm(
+        "service_76akn92s",
+        "contact_form",
+        form.current,
+        "pscuF4eCl7UEKToRd"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+
+          form.current?.reset();
+        },
+        (error) => {
+          console.log(error);
+
+          alert(JSON.stringify(error));
+        }
+      );
+  };
+
   return (
     <section
       id="contact"
@@ -37,7 +68,7 @@ export default function Contact() {
           <div className="mt-14">
 
             <a
-              href="mailto:a.kaushik3003@gmail.com"
+              href="mailto:akaushik5008@gmail.com"
               className="flex items-center gap-5 bg-white border border-gray-200 rounded-3xl px-6 py-5 shadow-md hover:shadow-cyan-100 transition duration-300 hover:-translate-y-1 w-fit"
             >
 
@@ -95,7 +126,11 @@ export default function Contact() {
           className="bg-white border border-gray-200 rounded-[35px] p-10 shadow-xl"
         >
 
-          <form className="space-y-8">
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+            className="space-y-8"
+          >
 
             {/* Name */}
             <div>
@@ -106,7 +141,10 @@ export default function Contact() {
 
               <input
                 type="text"
+                name="name"
                 placeholder="Enter your name"
+                required
+                autoComplete="off"
                 className="w-full border border-gray-300 rounded-2xl px-6 py-5 outline-none focus:border-cyan-500 transition duration-300"
               />
 
@@ -121,7 +159,10 @@ export default function Contact() {
 
               <input
                 type="email"
+                name="email"
                 placeholder="Enter your email"
+                required
+                autoComplete="off"
                 className="w-full border border-gray-300 rounded-2xl px-6 py-5 outline-none focus:border-cyan-500 transition duration-300"
               />
 
@@ -136,7 +177,10 @@ export default function Contact() {
 
               <textarea
                 rows={6}
+                name="message"
                 placeholder="Write your message..."
+                required
+                autoComplete="off"
                 className="w-full border border-gray-300 rounded-2xl px-6 py-5 outline-none focus:border-cyan-500 transition duration-300 resize-none"
               />
 
