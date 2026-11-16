@@ -21,8 +21,7 @@ export default function RootLayout({
           id="portfolio-theme-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{var saved=localStorage.getItem('portfolio-theme');var system=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=saved||(system?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}})();",
+            __html: "document.documentElement.dataset.theme='light';",
           }}
         />
       </head>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 
@@ -11,20 +11,10 @@ export default function ThemeToggle() {
   const prefersReducedMotion = useReducedMotion();
   const reduceMotion = prefersReducedMotion ?? false;
 
-  useEffect(() => {
-    setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
-  }, []);
-
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = nextTheme;
     setTheme(nextTheme);
-
-    try {
-      window.localStorage.setItem("portfolio-theme", nextTheme);
-    } catch {
-      // The theme still changes for this visit when storage is unavailable.
-    }
   }
 
   return (
