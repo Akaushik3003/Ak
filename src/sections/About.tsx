@@ -1,119 +1,81 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { ArrowDownRight, Braces, HeartHandshake, Shield } from "lucide-react";
+import Reveal from "@/components/Reveal";
+
+const values = [
+  {
+    title: "Make complex things feel clear",
+    detail: "A strong product should feel thoughtful on the inside and effortless on the outside.",
+    icon: Braces,
+  },
+  {
+    title: "Build with trust in mind",
+    detail: "Security, care, and respect for people’s information belong in the first sketch, not the final patch.",
+    icon: Shield,
+  },
+  {
+    title: "Give useful ideas a life",
+    detail: "I’m drawn to projects that solve a real problem or keep something meaningful within reach.",
+    icon: HeartHandshake,
+  },
+];
 
 export default function About() {
   return (
     <section
       id="about"
-      className="bg-white text-black py-32 px-6"
+      className="section-surface scroll-mt-24 border-y border-slate-200/70 px-6 py-24 sm:py-32"
     >
-
-      <div className="max-w-6xl mx-auto text-center">
-
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-        >
-
-          <p className="uppercase tracking-[0.3em] text-cyan-500 text-sm mb-6">
-            About Me
-          </p>
-
-          <h2 className="text-5xl md:text-7xl font-bold mb-12">
-            Who I Am
+      <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-20">
+        <Reveal>
+          <p className="section-eyebrow">01 / A little about me</p>
+          <h2 className="mt-5 max-w-xl text-5xl font-semibold leading-[0.96] tracking-[-0.06em] text-slate-950 sm:text-6xl">
+            Curious about what technology can protect — and preserve.
           </h2>
-
-          {/* Description */}
-          <p className="text-gray-700 text-lg md:text-2xl leading-relaxed max-w-5xl mx-auto">
-
-            I am A.Kaushik, a Computer Science undergraduate with hands-on
-            experience in Python, SQL, React, and full-stack development.
-            I enjoy building modern, scalable, and user-friendly web applications
-            while continuously exploring new technologies and improving my
-            problem-solving skills.
-
-            <br />
-            <br />
-
-            I am passionate about creating impactful digital solutions,
-            learning emerging technologies, and gaining real-world
-            industry experience through projects and internships.
-
+          <p className="mt-8 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
+            I’m Kaushik, a developer who likes working where a tricky technical
+            idea meets a human reason to build. One project led me into
+            post-quantum security; another into the stories carried by Telugu
+            home cooking. They may seem far apart, but both ask the same thing:
+            how can technology help people keep what matters safe and accessible?
           </p>
+          <a
+            href="#projects"
+            className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-cyan-800 transition-colors hover:text-cyan-600"
+          >
+            See the ideas behind my work <ArrowDownRight size={16} aria-hidden="true" />
+          </a>
+        </Reveal>
 
-        </motion.div>
-
-        {/* Highlight Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8 mt-24"
-        >
-
-          {/* Card 1 */}
-          <div className="bg-[#fafafa] border border-gray-200 rounded-3xl p-10 shadow-md hover:shadow-cyan-200/40 transition duration-500">
-
-            <h3 className="text-4xl font-bold text-cyan-500 mb-4">
-              5+
-            </h3>
-
-            <p className="text-xl font-semibold mb-3">
-              Projects Built
-            </p>
-
-            <p className="text-gray-600 leading-relaxed">
-              Developed academic and personal projects using
-              modern full-stack technologies and secure systems.
-            </p>
-
+        <div className="lg:border-l lg:border-slate-200 lg:pl-12">
+          <Reveal delay={0.08}>
+            <p className="section-eyebrow">How I like to build</p>
+          </Reveal>
+          <div className="mt-4 divide-y divide-slate-200 border-y border-slate-200">
+            {values.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <Reveal key={item.title} delay={0.12 + index * 0.09} distance={16}>
+                  <article className="grid gap-3 py-5 sm:grid-cols-[3rem_1fr] sm:gap-5 sm:py-6">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-50 text-cyan-800">
+                      <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3 className="text-base font-semibold text-slate-950 sm:text-lg">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
           </div>
-
-          {/* Card 2 */}
-          <div className="bg-[#fafafa] border border-gray-200 rounded-3xl p-10 shadow-md hover:shadow-cyan-200/40 transition duration-500">
-
-            <h3 className="text-4xl font-bold text-cyan-500 mb-4">
-              Internship
-            </h3>
-
-            <p className="text-xl font-semibold mb-3">
-              Vishwam AI
-            </p>
-
-            <p className="text-gray-600 leading-relaxed">
-              Worked on full-stack development, responsive UI,
-              and modern web application features.
-            </p>
-
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-[#fafafa] border border-gray-200 rounded-3xl p-10 shadow-md hover:shadow-cyan-200/40 transition duration-500">
-
-            <h3 className="text-4xl font-bold text-cyan-500 mb-4">
-              Skills
-            </h3>
-
-            <p className="text-xl font-semibold mb-3">
-              Tech Stack
-            </p>
-
-            <p className="text-gray-600 leading-relaxed">
-              Python, React, SQL, Next.js, JavaScript,
-              Full Stack Development, and UI Design.
-            </p>
-
-          </div>
-
-        </motion.div>
-
+        </div>
       </div>
-
     </section>
   );
 }

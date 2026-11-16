@@ -1,136 +1,142 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { ArrowUpRight, Code2 } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import Reveal from "@/components/Reveal";
+import ProjectImage from "@/components/ProjectImage";
 
 const projects = [
   {
     title: "Chess-Based Encryption",
-    description:
-      "Secure encryption platform using chess movement logic, steganography, and cryptographic algorithms.",
-    tech: ["Python", "Security", "Encryption"],
+    subtitle: "A private message, hidden in plain sight",
+    question: "What if sending a secret could look like sharing an ordinary image?",
+    story:
+      "I explored that idea by bringing together post-quantum key exchange, strong message encryption, a chessboard-inspired permutation, and image steganography. A React interface and FastAPI service connect the pieces into an encrypt-and-decrypt experience.",
+    detail: "Kyber512 · XChaCha20 · ChessPerm · LSB PNG steganography",
+    tech: ["Python", "FastAPI", "React", "liboqs"],
     github: "https://github.com/Akaushik3003/Chess-Based-Encryption",
     image: "/chess.png",
   },
-
   {
     title: "TeluguKitchen",
-    description:
-      "Modern food and recipe platform with responsive UI and clean user experience.",
-    tech: ["React", "Frontend", "UI"],
+    subtitle: "A home for Telugu food stories",
+    question: "How can a recipe live on beyond the kitchen where it began?",
+    story:
+      "TeluguKitchen is my attempt at a thoughtful home for regional recipes and the knowledge around them. People can contribute recipes and media; search and categories make them easier to rediscover, while sign-in and moderation help keep the collection organized.",
+    detail: "Recipe submissions · contributor moderation · cultural collection",
+    tech: ["Next.js 14", "TypeScript", "Prisma", "SQLite"],
     github: "https://github.com/Akaushik3003/TeluguKitchen",
     image: "/telugu.png",
   },
 ];
 
 export default function Projects() {
+  const prefersReducedMotion = useReducedMotion();
+  const reduceMotion = prefersReducedMotion ?? false;
+
   return (
     <section
       id="projects"
-      className="bg-white text-black py-32 px-6"
+      className="section-surface-soft scroll-mt-24 px-6 py-24 sm:py-32"
     >
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <div className="mb-12 grid gap-5 sm:mb-16 sm:grid-cols-[1fr_0.8fr] sm:items-end">
+            <div>
+              <p className="section-eyebrow">05 / Selected work</p>
+              <h2 className="mt-5 max-w-2xl text-5xl font-semibold leading-[0.96] tracking-[-0.06em] text-slate-950 sm:text-6xl">
+                Built with purpose.
+              </h2>
+            </div>
+            <p className="max-w-xl text-base leading-7 text-slate-600 sm:justify-self-end sm:text-right">
+              Two very different ideas, connected by a belief that software
+              should help people protect or preserve what matters.
+            </p>
+          </div>
+        </Reveal>
 
-      <div className="max-w-7xl mx-auto">
-
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-
-          <p className="uppercase tracking-[0.3em] text-cyan-500 text-sm mb-4">
-            Portfolio
-          </p>
-
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
-            Featured Projects
-          </h2>
-
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-            A collection of projects showcasing development,
-            problem-solving, and modern UI experiences.
-          </p>
-
-        </motion.div>
-
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-10">
-
-          {projects.map((project, index) => (
-
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 80 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8 }}
-              className="bg-[#f8f8f8] border border-gray-200 rounded-3xl overflow-hidden shadow-md hover:shadow-cyan-200/40 transition duration-500"
-            >
-
-              {/* Project Image */}
-              <div className="relative w-full h-[300px] overflow-hidden">
-
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover hover:scale-105 transition duration-700"
-                />
-
-              </div>
-
-              {/* Content */}
-              <div className="p-8">
-
-                <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-cyan-500 to-purple-600 bg-clip-text text-transparent">
-                  {project.title}
-                </h3>
-
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-3 mb-8">
-
-                  {project.tech.map((item, i) => (
-                    <span
-                      key={i}
-                      className="px-4 py-2 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200 text-sm"
+        <div className="space-y-5 sm:space-y-7">
+          {projects.map((project, index) => {
+            const imageOnRight = index % 2 === 0;
+            return (
+              <Reveal key={project.title} delay={index * 0.1} distance={22}>
+                <motion.article
+                  className="project-card group overflow-hidden rounded-[1.8rem] border border-slate-200/80 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.06)] transition-shadow duration-300 hover:shadow-[0_26px_70px_rgba(15,23,42,0.12)]"
+                  whileHover={reduceMotion ? undefined : { y: -5 }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
+                >
+                  <div className="grid lg:grid-cols-2">
+                    <div
+                      className={[
+                        "order-1 flex flex-col justify-center p-6 sm:p-9 lg:p-12",
+                        imageOnRight ? "lg:order-1" : "lg:order-2",
+                      ].join(" ")}
                     >
-                      {item}
-                    </span>
-                  ))}
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs font-semibold tabular-nums tracking-[0.18em] text-cyan-800">
+                          0{index + 1}
+                        </span>
+                        <span className="h-px w-8 bg-cyan-600" />
+                        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+                          Featured project
+                        </span>
+                      </div>
 
-                </div>
+                      <h3 className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.04em] text-slate-950 sm:text-4xl">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-cyan-800">
+                        {project.subtitle}
+                      </p>
+                      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.15em] text-slate-400">
+                        The question
+                      </p>
+                      <p className="mt-2 max-w-xl text-base font-medium leading-7 text-slate-800 sm:text-lg sm:leading-8">
+                        {project.question}
+                      </p>
+                      <p className="mt-3 max-w-xl text-sm leading-7 text-slate-600 sm:text-base sm:leading-8">
+                        {project.story}
+                      </p>
+                      <p className="mt-4 text-xs font-medium leading-6 text-slate-500">
+                        {project.detail}
+                      </p>
 
-                {/* GitHub Button */}
-                <div className="mt-6">
+                      <ul className="mt-5 flex flex-wrap gap-2">
+                        {project.tech.map((item) => (
+                          <li
+                            key={item}
+                            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-500"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
 
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    className="inline-block px-6 py-3 rounded-full bg-cyan-400 text-black font-semibold hover:scale-105 hover:-translate-y-1 transition duration-300 shadow-md hover:shadow-cyan-300/40"
-                  >
-                    View GitHub Repository
-                  </a>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-7 inline-flex w-fit items-center gap-2 border-b border-slate-300 pb-2 text-sm font-semibold text-slate-900 transition-colors hover:border-cyan-700 hover:text-cyan-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-700"
+                        aria-label={"View " + project.title + " on GitHub"}
+                      >
+                        <Code2 size={16} aria-hidden="true" />
+                        View GitHub repository
+                        <ArrowUpRight size={15} aria-hidden="true" />
+                      </a>
+                    </div>
 
-                </div>
-
-              </div>
-
-            </motion.div>
-
-          ))}
-
+                    <ProjectImage
+                      src={project.image}
+                      alt={project.title + " project screenshot"}
+                      className={imageOnRight ? "lg:order-2" : "lg:order-1"}
+                    />
+                  </div>
+                </motion.article>
+              </Reveal>
+            );
+          })}
         </div>
-
       </div>
-
     </section>
   );
 }

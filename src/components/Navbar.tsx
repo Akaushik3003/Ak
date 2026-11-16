@@ -1,64 +1,135 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import MagneticLink from "@/components/MagneticLink";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
-  { name: "Home", link: "#home" },
   { name: "About", link: "#about" },
+  { name: "Experience", link: "#journey" },
   { name: "Skills", link: "#skills" },
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
 ];
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+  const reduceMotion = prefersReducedMotion ?? false;
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const next = latest > 18;
+    setIsScrolled((current) => (current === next ? current : next));
+  });
+
+  function closeMenu() {
+    setMobileOpen(false);
+  }
+
   return (
-    <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/70 border-b border-gray-200 shadow-sm"
-    >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-5 md:px-6 py-4">
-
-        {/* Logo */}
-        <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-500 to-purple-600 bg-clip-text text-transparent">
-          A.Kaushik
-        </h1>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-
-          {navItems.map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              className="relative text-gray-700 hover:text-cyan-500 transition duration-300 font-medium group"
-            >
-              {item.name}
-
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-cyan-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          ))}
-
-          {/* Resume Button */}
+    <header className="fixed inset-x-0 top-4 z-50 px-4">
+      <motion.div
+        className="relative mx-auto max-w-6xl"
+        initial={reduceMotion ? false : { opacity: 0, y: -14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: reduceMotion ? 0 : 0.55, delay: reduceMotion ? 0 : 0.68, ease: "easeOut" }}
+      >
+        <nav
+          aria-label="Main navigation"
+          className={[
+            "flex items-center justify-between rounded-full border px-4 py-3 transition-all duration-300 sm:px-6",
+            isScrolled
+              ? "border-white/80 bg-white/90 shadow-[0_12px_36px_rgba(15,23,42,0.10)] backdrop-blur-xl"
+              : "border-white/70 bg-white/72 shadow-[0_8px_28px_rgba(15,23,42,0.06)] backdrop-blur-lg",
+          ].join(" ")}
+        >
           <a
-            href="/Kaushik.pdf"
-            download
-            className="px-5 py-2 rounded-full bg-cyan-400 text-black font-semibold hover:scale-105 transition duration-300 shadow-lg hover:shadow-cyan-400/40"
+            href="#home"
+            onClick={closeMenu}
+            className="rounded-full text-lg font-semibold tracking-tight text-slate-950 sm:text-xl"
+            aria-label="A.Kaushik home"
           >
-            Resume
+            A<span className="text-cyan-600">.</span>Kaushik
           </a>
 
-        </div>
+          <div className="hidden items-center gap-6 lg:flex xl:gap-7">
+            {navItems.map((item) => (
+              <a
+                key={item.link}
+                href={item.link}
+                className="nav-link text-sm font-medium text-slate-600 transition-colors hover:text-slate-950"
+              >
+                {item.name}
+              </a>
+            ))}
+            <MagneticLink
+              href="/Kaushik.pdf"
+              download
+              className="cta-button inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-cyan-700"
+            >
+              Resume <ArrowUpRight size={15} aria-hidden="true" />
+            </MagneticLink>
+          </div>
 
-        {/* Mobile Menu Icon */}
-        <div className="md:hidden">
-          <button className="p-2 rounded-lg hover:bg-gray-100 transition duration-300 text-2xl text-black">
-            ☰
-          </button>
-        </div>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              type="button"
+              className="nav-mobile-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 transition-colors hover:bg-slate-50 lg:hidden"
+              aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMobileOpen((open) => !open)}
+            >
+              {mobileOpen ? <X size={19} /> : <Menu size={19} />}
+            </button>
+          </div>
+        </nav>
 
-      </div>
-    </motion.nav>
+        <AnimatePresence initial={false}>
+          {mobileOpen && (
+            <motion.div
+              id="mobile-navigation"
+              className="absolute inset-x-0 top-full mt-3 rounded-3xl border border-slate-200/80 bg-white/95 p-3 shadow-[0_18px_45px_rgba(15,23,42,0.12)] backdrop-blur-xl lg:hidden"
+              initial={reduceMotion ? false : { opacity: 0, y: -8, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={reduceMotion ? undefined : { opacity: 0, y: -8, scale: 0.98 }}
+              transition={{ duration: reduceMotion ? 0 : 0.18, ease: "easeOut" }}
+            >
+              <div className="flex flex-col">
+                {navItems.map((item) => (
+                  <a
+                    key={item.link}
+                    href={item.link}
+                    onClick={closeMenu}
+                    className="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-950"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <a
+                  href="/Kaushik.pdf"
+                  download
+                  onClick={closeMenu}
+                  className="cta-button mt-2 inline-flex items-center justify-between rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white"
+                >
+                  Download resume <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </header>
   );
 }

@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import SiteEffects from "@/components/SiteEffects";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata = {
+export const metadata: Metadata = {
   title: "A.Kaushik - Software Developer",
-  description: "Kaushik Portfolio Website",
+  description:
+    "Portfolio of A.Kaushik, a Computer Science undergraduate passionate about full-stack development and modern digital experiences.",
 };
 
 export default function RootLayout({
@@ -23,11 +15,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          id="portfolio-theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var saved=localStorage.getItem('portfolio-theme');var system=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=saved||(system?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}})();",
+          }}
+        />
+      </head>
+      <body className="min-h-screen bg-white text-slate-900 antialiased">
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        <SiteEffects />
+        <div className="relative z-10">{children}</div>
+      </body>
     </html>
   );
 }
