@@ -294,6 +294,16 @@ textarea:focus-visible {
   bottom: 29%;
 }
 
+.hero-photo-caption {
+  justify-content: center;
+  padding: 1rem 1.25rem 2rem;
+  text-align: center;
+}
+
+.hero-photo-caption > span {
+  display: none;
+}
+
 .hero-art {
   isolation: isolate;
 }
@@ -344,12 +354,34 @@ textarea:focus-visible {
 }
 
 @media (min-width: 640px) {
+  .hero-photo-caption {
+    justify-content: space-between;
+    padding: 1.75rem;
+    text-align: left;
+  }
+
+  .hero-photo-caption > span {
+    display: flex;
+  }
+
   .hero-float-card--stack {
     left: -2rem;
   }
 
   .hero-float-card--security {
     right: -1.25rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-float-card--stack {
+    top: 13%;
+    left: -0.75rem;
+  }
+
+  .hero-float-card--security {
+    right: -0.75rem;
+    bottom: 18%;
   }
 }
 

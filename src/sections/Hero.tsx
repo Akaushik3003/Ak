@@ -115,18 +115,18 @@ export default function Hero() {
             >
               01
             </span>
-            <div className="relative z-10 overflow-hidden rounded-[2rem] border border-white bg-white p-2.5 shadow-[0_30px_90px_rgba(15,23,42,0.16)]">
-              <div className="relative aspect-[5/3] overflow-hidden rounded-[1.45rem] bg-slate-100 sm:aspect-[4/5]">
+            <div className="relative z-10 overflow-hidden rounded-full border border-white bg-white p-2.5 shadow-[0_30px_90px_rgba(15,23,42,0.16)] sm:rounded-[2rem]">
+              <div className="relative aspect-square overflow-hidden rounded-full bg-slate-100 sm:aspect-[4/5] sm:rounded-[1.45rem]">
                 <Image
                   src="/ak.jpeg"
                   alt="Portrait of A.Kaushik"
                   fill
                   priority
                   sizes="(max-width: 1024px) 90vw, 430px"
-                  className="object-cover"
+                  className="object-cover object-[center_35%] sm:object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
+                <div className="hero-photo-caption absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 sm:p-7">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">
                       Software developer
